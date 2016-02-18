@@ -5,8 +5,8 @@ from .slic_superpixels import slic
 from ._quickshift import quickshift
 from .boundaries import find_boundaries, mark_boundaries
 from ._clear_border import clear_border
+from .chan_vese import chan_vese
 from ._join import join_segmentations, relabel_from_one, relabel_sequential
-
 
 __all__ = ['random_walker',
            'active_contour',
@@ -18,4 +18,6 @@ __all__ = ['random_walker',
            'clear_border',
            'join_segmentations',
            'relabel_from_one',
-           'relabel_sequential']
+           'relabel_sequential',
+           'chan_vese'
+           ]
