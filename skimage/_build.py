@@ -1,7 +1,7 @@
 import sys
 import os
 import hashlib
-import subprocess
+from distutils.version import LooseVersion
 
 # WindowsError is not defined on unix systems
 try:
@@ -25,6 +25,10 @@ def cython(pyx_files, working_path=''):
         return
 
     try:
+        from Cython import __version__
+        if LooseVersion(__version__) < '0.23':
+            raise RuntimeError('Cython >= 0.23 needed to build scikit-image')
+
         from Cython.Build import cythonize
     except ImportError:
         # If cython is not found, we do nothing -- the build will make use of
@@ -91,6 +95,6 @@ def process_tempita_pyx(fromfile):
     if not fromfile.endswith('.pyx.in'):
         raise ValueError("Unexpected extension of %s." % fromfile)
 
-    pyxfile = os.path.splitext(fromfile)[0] + '.pyx'
+    pyxfile = os.path.splitext(fromfile)[0]    # split off the .in ending
     with open(pyxfile, "w") as f:
         f.write(pyxcontent)
