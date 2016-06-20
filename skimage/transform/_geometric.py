@@ -4,8 +4,7 @@ import numpy as np
 from scipy import spatial
 from scipy import ndimage as ndi
 
-from .._shared.utils import (get_bound_method_class, safe_as_int,
-                             _mode_deprecations, warn)
+from .._shared.utils import (get_bound_method_class, safe_as_int, warn)
 from ..util import img_as_float
 
 from ._warps_cy import _warp_fast
@@ -13,7 +12,6 @@ from ._warps_cy import _warp_fast
 
 def _to_ndimage_mode(mode):
     """Convert from `numpy.pad` mode name to the corresponding ndimage mode."""
-    mode = _mode_deprecations(mode.lower())
     mode_translation_dict = dict(edge='nearest', symmetric='reflect',
                                  reflect='mirror')
     if mode in mode_translation_dict:
@@ -346,8 +344,6 @@ class AffineTransform(ProjectiveTransform):
 
     """2D affine transformation of the form:
 
-    ..:math:
-
         X = a0*x + a1*y + a2 =
           = sx*x*cos(rotation) - sy*y*sin(rotation + shear) + a2
 
@@ -574,8 +570,6 @@ class PiecewiseAffineTransform(GeometricTransform):
 class SimilarityTransform(ProjectiveTransform):
     """2D similarity transformation of the form:
 
-    ..:math:
-
         X = a0 * x - b0 * y + a1 =
           = m * x * cos(rotation) - m * y * sin(rotation) + a1
 
@@ -745,8 +739,6 @@ class SimilarityTransform(ProjectiveTransform):
 
 class PolynomialTransform(GeometricTransform):
     """2D transformation of the form:
-
-    ..:math:
 
         X = sum[j=0:order]( sum[i=0:j]( a_ji * x**(j - i) * y**i ))
         Y = sum[j=0:order]( sum[i=0:j]( b_ji * x**(j - i) * y**i ))
@@ -1155,7 +1147,7 @@ def _clip_warp_output(input_image, output_image, order, mode, cval, clip):
             output_image[cval_mask] = cval
 
 
-def warp(image, inverse_map=None, map_args={}, output_shape=None, order=1,
+def warp(image, inverse_map, map_args={}, output_shape=None, order=1,
          mode='constant', cval=0., clip=True, preserve_range=False):
     """Warp an image according to a given coordinate transformation.
 
@@ -1292,7 +1284,6 @@ def warp(image, inverse_map=None, map_args={}, output_shape=None, order=1,
     >>> warped = warp(cube, coords)
 
     """
-    mode = _mode_deprecations(mode)
     image = _convert_warp_input(image, preserve_range)
 
     input_shape = np.array(image.shape)

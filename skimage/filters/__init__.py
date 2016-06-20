@@ -1,15 +1,15 @@
 from .lpi_filter import inverse, wiener, LPIFilter2D
 from ._gaussian import gaussian
-from .edges import (sobel, hsobel, vsobel, sobel_h, sobel_v,
-                    scharr, hscharr, vscharr, scharr_h, scharr_v,
-                    prewitt, hprewitt, vprewitt, prewitt_h, prewitt_v,
-                    roberts, roberts_positive_diagonal,
-                    roberts_negative_diagonal, roberts_pos_diag,
-                    roberts_neg_diag, laplace)
+from .edges import (sobel, sobel_h, sobel_v,
+                    scharr, scharr_h, scharr_v,
+                    prewitt, prewitt_h, prewitt_v,
+                    roberts, roberts_pos_diag, roberts_neg_diag,
+                    laplace)
 from ._rank_order import rank_order
 from ._gabor import gabor_kernel, gabor
 from .thresholding import (threshold_adaptive, threshold_otsu, threshold_yen,
-                           threshold_isodata, threshold_li)
+                           threshold_isodata, threshold_li, threshold_minimum,
+                           threshold_mean, threshold_triangle, try_all_threshold)
 from . import rank
 from .rank import median
 
@@ -27,23 +27,15 @@ __all__ = ['inverse',
            'gaussian',
            'median',
            'sobel',
-           'hsobel',
-           'vsobel',
            'sobel_h',
            'sobel_v',
            'scharr',
-           'hscharr',
-           'vscharr',
            'scharr_h',
            'scharr_v',
            'prewitt',
-           'hprewitt',
-           'vprewitt',
            'prewitt_h',
            'prewitt_v',
            'roberts',
-           'roberts_positive_diagonal',
-           'roberts_negative_diagonal',
            'roberts_pos_diag',
            'roberts_neg_diag',
            'laplace',
@@ -53,9 +45,13 @@ __all__ = ['inverse',
            'rank_order',
            'gabor_kernel',
            'gabor',
+           'try_all_threshold',
            'threshold_adaptive',
            'threshold_otsu',
            'threshold_yen',
            'threshold_isodata',
            'threshold_li',
+           'threshold_minimum',
+           'threshold_mean',
+           'threshold_triangle',
            'rank']
